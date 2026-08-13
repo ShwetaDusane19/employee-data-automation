@@ -1,0 +1,67 @@
+Data Analysis:
+Data analysis is a process that involves defining the purpose of the data, ​gathering, cleaning and analyzing it to gain insights. 
+
+pandas:
+ fillna(method='ffill')-- carry forword previous values
+
+fillna(method='bfill')-- carry forword next  values
+
+fillna(method='bfill',limit=1)-- set limit of value coping to 1
+
+fillna(method='ffill',axis='column')-- it will copy or fill value row by row
+
+dropna()
+
+for all columns
+df.replace('[A-Za-z]','',regex=True) -- 
+
+for required column
+df.replace({
+	'temp':'[A-Za_z]',
+	'windspeed':'[A-Za-z]'		
+	},'',regex='True')
+
+
+** replace list of values with another list of values
+
+df.replace(['poor','avgerage','good','excellent'],[1,2,3,4])
+
+----------------------------
+group by
+- g= df.groupby('city')
+-g
+
+--to access each of these groups(city_df is iterator)
+
+for city, city_df in g:
+	print(city)
+	print(city_df)
+
+--to access specific dataframe
+g.get_group('mumbai')
+
+--g.max()-- max value from each group 
+--g.mean()
+
+-------------------------------------
+
+Concat Dataframes 
+**append rows
+
+df=pd.concate([india_weather,us_weather],ignore_index=True)
+
+--df=pd.concate([india_weather,us_weather],ignore_index=True,keys=['india','us'])-- it will show subset dataframe
+
+df.loc["India"]-- it will show india dataframe (subset) of new combined dataframe 
+
+** append columns of one dataframe to other
+df=pd.concat(['temp_df',wind_df],axis=1)
+
+--------------------------------------
+merge 
+used to merge to dataframe on given condition same joins in sql
+
+--df=pd.merge(df1,df2, on='city') -- will work as inner join, only comman cities will be merged
+
+-- if want to outer join
+df=pd.merge(df1,df2,on='city', how='outer')
